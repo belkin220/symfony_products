@@ -1,0 +1,31 @@
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	<div class="account-pages pt-2 mt-4">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12">
+					<div class="card">
+						<!-- Logo-->
+						<div class="card-header  text-center bg-primary">
+							<a href="index.html">
+								<h4 class="text-white text-center">
+									{{productName}}
+								</h4>
+							</a>
+						</div>
+						<div class="card-body p-4">
+							{{ form_start(form, {'action': path('app_product_image_show', {'id': id}), 'method': 'POST'}) }}
+							<div class="mb-3 text-center">
+								{{form_row(form.image)}}
+							</div>
+							<div class="mb-3 text-center">
+								<button class="btn btn-primary" type="submit">
+									Enviar
+								</button>
+								
+							</div>
+							{{ form_end(form) }}
+						</div>
+{% endblock %}

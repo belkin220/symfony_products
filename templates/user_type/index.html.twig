@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ <div class="account-pages pt-2 mt-4">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-xxl-4 col-lg-5">
+				<div class="card">
+                    <!-- Logo-->
+                    <div class="card-header  text-center bg-primary">
+                        <a href="index.html">
+                           <h4 class="text-white text-center">
+                                Formulario Productos
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="card-body p-4">  
+                     {% if form is not empty %}                            
+                        {{ form_start(form) }}                                       
+                        <div class="mb-3">
+                            {{ form_label(form.name, 'Nombre') }}
+                            {{ form_widget(form.name) }}                 
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.description, 'Descripción') }}
+                            {{ form_widget(form.description) }}
+                             
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.price, 'Precio') }}
+                            <div class="input-group input-group-merge">
+                                {{ form_widget(form.price, { 'type':'float' }) }}
+                                <div class="input-group-text">
+                                    <span>{% trans %}${% endtrans %}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.image, 'Imagen') }}
+                            {{ form_widget(form.image) }}  
+                            <small>{{ form_errors(form.image) }}  </small>             
+                        </div>      
+                      
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary" type="submit">
+                                {% trans %}Enviar{% endtrans %}
+                            </button>
+                        </div>
+                        {{ form_end(form) }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

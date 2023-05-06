@@ -1,0 +1,50 @@
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	
+<div class="col-12">
+<div class="card">
+<!-- Logo-->
+<div class="card-header  text-center bg-primary">
+	<a href="index.html">
+		<h4 class="text-white text-center">
+			{{data.name}}
+		</h4>
+	</a>
+</div>
+<div class="card-body p-4">
+	{{ form_start(form, {'action': path('app_product_edit', {'id': data.id}), 'method': 'POST'}) }}
+	<div class="mb-3 text-center">
+		<img src="/uploads/images/{{data.image}}" height="80" width="80">
+	</div>
+	<div class="mb-3 text-center">
+		<a class="btn btn-outline-primary btn-sm" href="/product/image-show/{{data.id}}" type="button"
+		>Cambiar imagen</a>
+	</div>
+	<div class="mb-3">
+		{{ form_row(form.name) }} 
+	</div>
+	<div class="mb-3">
+		{{ form_row(form.description) }}
+	</div>
+	<div class="mb-3">
+		{{ form_label(form.price, 'Precio') }}
+		<div class="input-group input-group-merge">												
+			{{ form_widget(form.price) }}
+			<div class="input-group-text">
+				<span>{% trans %}${% endtrans %}</span>
+			</div>
+		</div>
+	</div>
+	<div class="mb-3 text-center">
+		<button class="btn btn-primary" type="submit">
+			Enviar
+		</button>
+		<a class="btn btn-warning" href="{{path('app_muestra')}}">
+			Cancelar
+		</a>
+	</div>
+	{{ form_end(form) }}
+</div>
+{% endblock %}

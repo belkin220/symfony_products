@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Resume</title>
+
+    {% block styles %}
+     <link href="{{asset('css/icons.min.css')}}" rel="stylesheet">
+     <link href="{{asset('css/app.min.css')}}" rel="stylesheet">
+     {% endblock %}
+
+    {% block javascripts %}
+     <script src="{{asset('js/vendor.min.js')}}"></script>
+     <script src="{{asset('js/app.min.js')}}"></script>
+     <script src="{{asset('js/scripts.js')}}"></script> 
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+     <script>
+     $(document).ready(function () {
+        $('[data-bs-toggle="tooltip"]').tooltip({html:true});
+    });
+     </script>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <h4 class="text-center mt-2">Listado Productos a {{date}}</h4>
+    <div class="d-flex justify-content-end mt-n2">
+         <a class=" btn btn-outline-info btn-sm m-2" href="/producto"><i class="uil uil-plus"></i> Nuevo producto</a>
+         <a class=" btn btn-outline-primary btn-sm m-2" href="/pdf/generator">Exportar a PDF</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" width="100%" border="0">
+            <thead class="bg-success text-white text-center">
+                <th>Id</th>       
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Opciones</th>       
+            </thead>
+            <tbody>
+             {% for product in pagination %}
+            <tr class="align-middle">
+                <td>{{product.id}}</td>
+                <td><img src="uploads/images/{{ product.image }}" width="50" height="50"></td>            
+                <td class="name">{{product.name}}</td>         
+                <td>{{product.description}}</td>       
+                <td style="text-align:right;width:15%">{{ product.price|number_format(2, ',', '.') }} €</td>
+                <td style="width:15%"class="text-center">
+                    <a class="btn btn-outline-info btn-sm" title="Editar"
+                       href="{{ path('app_product_show', {'id': product.id}) }}" 
+                       data-bs-toggle="tooltip"
+                       data-bs-placement="top">
+                    <i class=" uil-file-edit-alt"></i>
+                    </a>
+                    <button class="btn btn-outline-danger btn-sm" id="btn-delete" 
+                    title="Eliminar"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    onclick="deleteProduct();"><i class=" uil-trash-alt"></i>
+                    </button>                    
+                </td>
+            </tr>      
+            {% endfor %}
+            </tbody>           
+        </table>       
+          <div class="navigation d-flex justify-content-end">
+            {{ knp_pagination_render(pagination) }}
+            </div>     
+    </div>
+</div>
+
+
+            
+</body>
+</html>
