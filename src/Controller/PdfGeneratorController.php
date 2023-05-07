@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Service\PdfGenerator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -22,8 +21,10 @@ class PdfGeneratorController extends AbstractController
          [
             'data' => $data,
             'date' => date("d/m/Y"),
+            'host' => $_SERVER['SERVER_NAME']
            
         ]);
+        // $html .= '<link type="text/css" href="https://symfonypdf.dev.com/css/pdfgenerator.css" rel="stylesheet" />';
         $pdf = new PdfGenerator();
         $pdf->generatePdf($html); 
         
