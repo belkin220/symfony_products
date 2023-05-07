@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Resume</title>
-
     {% block styles %}
      <link href="{{asset('css/icons.min.css')}}" rel="stylesheet">
      <link href="{{asset('css/app.min.css')}}" rel="stylesheet">
@@ -28,13 +27,12 @@
          <a class=" btn btn-outline-info btn-sm m-2" href="/producto"><i class="uil uil-plus"></i> Nuevo producto</a>
          <a class=" btn btn-outline-primary btn-sm m-2" href="/pdf/generator">Exportar a PDF</a>
     </div>
-
     <div class="table-responsive">
         <table class="table" width="100%" border="0">
             <thead class="bg-success text-white text-center">
                 <th>Id</th>       
                 <th>Imagen</th>
-                <th>Nombre</th>
+                <th>Producto</th>
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Opciones</th>       
@@ -69,9 +67,6 @@
             {{ knp_pagination_render(pagination) }}
             </div>     
     </div>
-</div>
-
-
-            
+</div>           
 </body>
 </html>

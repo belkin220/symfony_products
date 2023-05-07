@@ -35,7 +35,7 @@ class PdfGeneratorController extends AbstractController
         $pdf->setPaper('A4', 'landscape');
         $options->set('isPhpEnabled', true);
         $options->set('defaultFont','Arial');
-        $options->set(array('isRemoteEnabled' => true));
+        $options->set('isRemoteEnabled', true);
         $pdf->setOptions($options);
         $pdf->render();
         return new Response (
