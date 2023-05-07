@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PdfGeneratorController extends AbstractController
 {
@@ -18,17 +17,16 @@ class PdfGeneratorController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $pdf = new Dompdf();
-        $canvas = $pdf->getCanvas();
         $options = new \Dompdf\Options();
+        $canvas = $pdf->getCanvas();
               
         $data = $entityManager->getRepository(Product::class)->findAll();
         $html =  $this->renderView('pdf_generator/index.html.twig',
          [
             'data' => $data,
             'date' => date("d/m/Y"),
-            'page' => $canvas->get_page_number(),
             'page_count' => $canvas->get_page_count(),
-            
+           
         ]);
               
         $pdf->loadHtml($html);

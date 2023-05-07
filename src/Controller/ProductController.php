@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use Flasher\Prime\Flasher;
 use App\Form\EditImageType;
 use App\Form\EditProductType;
 use App\Service\FileUploader;

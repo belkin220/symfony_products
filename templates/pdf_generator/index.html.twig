@@ -73,9 +73,22 @@
     height: 50px;
     object-fit: cover;
     }
-        #footer { position: fixed; right: 0px; bottom: 2px; text-align: center;}
-        #footer .page:after { content: counter(page, decimal); }
-        @page { margin: 20px 30px 40px 50px; }
+    #footer {
+    position: fixed;  
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height:30px;
+    background-color: #0acf97;
+    color: white;
+    text-align: center;
+    font-weight:bold;
+    margin-right:15px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:1px
+    }
+    #footer .page:after { content: counter(page, decimal); }
+    @page { margin: 5px 20px 30px 40px;  }
 </style>
 </head>
 	<body>
@@ -83,6 +96,9 @@
 			<div class="title">
 				Listado de productos a
 				{{date}}
+			</div>
+            <div id ="footer">
+				<p class="page"  style="margin-top:3px">Página </p>
 			</div>
 			<div class="row">
 				<table class="table">
@@ -114,7 +130,7 @@
                 </div>
 			</div>
             <div id="footer">
-                <p class="page">Page </p>
+                <p class="page" style="margin-top:3px">Página </p>
             </div> 
 		</div>
 	</body>
