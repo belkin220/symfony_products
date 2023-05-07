@@ -20,7 +20,8 @@
         margin-bottom: 15px;
         display: flex;
         width: 100%;
-        margin-left: 35%
+        margin-left: 35%;
+        margin-top:15px
     }
     .row {
         display: -webkit-box;
@@ -77,8 +78,9 @@
     position: fixed;  
     right: 0;
     bottom: 0;
-    width: auto;
-    height:30px;
+    width: 25px;
+    height:25px;
+    border-radius:50%;
     background-color: #0acf97;
     color: white;
     text-align: center;
@@ -88,8 +90,7 @@
     padding:1px
     }
     #footer .page:after { content: counter(page, decimal); }
-    @page { margin: 5px 20px 30px 40px;  }
-</style>
+   </style>
 </head>
 	<body>
 		<div class="container">
@@ -98,7 +99,7 @@
 				{{date}}
 			</div>
             <div id ="footer">
-				<p class="page"  style="margin-top:3px">Página </p>
+				<p class="page"  style="margin-top:3px"></p>
 			</div>
 			<div class="row">
 				<table class="table">
@@ -130,7 +131,7 @@
                 </div>
 			</div>
             <div id="footer">
-                <p class="page" style="margin-top:3px">Página </p>
+                <p class="page" style="margin-top:3px"></p>
             </div> 
 		</div>
 	</body>
