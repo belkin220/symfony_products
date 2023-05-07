@@ -25,7 +25,6 @@ class PdfGeneratorController extends AbstractController
          [
             'data' => $data,
             'date' => date("d/m/Y"),
-            'page_count' => $canvas->get_page_count(),
            
         ]);
               
