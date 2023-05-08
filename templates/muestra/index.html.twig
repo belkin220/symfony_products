@@ -22,12 +22,47 @@
 </head>
 <body>
 <div class="container">
-    <h4 class="text-center mt-2">Listado Productos a {{date}}</h4>
+    <h4 class="text-center">Listado Productos a {{date}}</h4>
     <div class="d-flex justify-content-end mt-n2">
-         <a class=" btn btn-outline-info btn-sm m-2" href="/producto"><i class="uil uil-plus"></i> Nuevo producto</a>
-         <a class=" btn btn-outline-primary btn-sm m-2" href="/pdf/generator">Exportar a PDF</a>
-    </div>
-    <div class="table-responsive">
+    <li class="dropdown notification-list d-none d-sm-inline-block mt-n2">
+                                <a class="nav-link dropdown-toggle arrow-none" 
+                                data-bs-toggle="dropdown" 
+                                href="#" 
+                                role="button" 
+                                aria-haspopup="false" 
+                                aria-expanded="false">
+                                    <i class="dripicons-view-apps noti-icon"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg p-0">
+                                    <div class="p-2">
+                                        <div class="row g-0">
+                                            <div class="col">
+                                                <a class=" btn btn-outline-info btn-sm m-2" href="/producto">
+                                                <img src="{{asset('images/product_image.jpg')}}" width="40" height="40" ></a>
+                                            </div>
+                                            <div class="col">
+                                               <a class=" btn btn-outline-primary btn-sm m-2" 
+                                               href="/pdf/generator">
+                                                <img src="{{asset('images/pdf_file.jpg')}}" width="40" height="40" ></a> 
+                                            </div>
+                                            <div class="col">
+                                                <a class="btn btn-outline-info btn-sm m-2" href="#">
+                                                    <img src="{{asset('images/search.png')}}"  width="40" height="40" alt="Search">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+
+                                </div>
+                            </li>
+                            </div>
+    
+   
+       
+    
+    <div class="table-responsive mt-n2">
         <table class="table" width="100%" border="0">
             <thead class="bg-success text-white text-center">
                 <th>Id</th>       

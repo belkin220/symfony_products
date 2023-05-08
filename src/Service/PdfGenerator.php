@@ -12,13 +12,19 @@ class PdfGenerator extends Dompdf
         $options = new Options(); 
         $this->loadHtml($html); 
         $this->setPaper('A4', 'landscape');
-        $options->set('isPhpEnabled', true);
-        $options->set('defaultFont','Arial');
-        $options->set('isRemoteEnabled', true);
+        $options->set([
+            'isPhpEnabled'=> true,
+            'defaultFont' => 'Arial',
+            'isRemoteEnabled'=> true
+        ]);
+        
         $this->setOptions($options);
         $this->render();
+       
         return 
-            $this->stream('resume.pdf', ["Attachment" => false,]);
+            $this->stream('resume.pdf', [
+                "Attachment" => false]);
     }
+
 
 }

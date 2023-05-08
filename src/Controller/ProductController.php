@@ -19,12 +19,9 @@ class ProductController extends AbstractController
 {
     #[Route('/producto', name: 'app_user_type')]
 
-    public function index(
-        EntityManagerInterface $entityManager,
-        Request $request,
-        FileUploader $fileUploader,
-        HandleMessages $message
-    ) {
+    public function index(EntityManagerInterface $em, Request $request, FileUploader $fileUploader,
+                          HandleMessages $message) 
+    {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -35,8 +32,8 @@ class ProductController extends AbstractController
                 $imageFileName = $fileUploader->upload($imageFile);
                 $product->setImage($imageFileName);
             }
-            $entityManager->persist($product);
-            if ($entityManager->flush() == null) {
+            $em->persist($product);
+            if ($em->flush() == null) {
                 $message->messageNew($product->getName());
             }
 
@@ -61,38 +58,28 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/edit/{id}', name: 'app_product_edit')]
-    public function update(
-        EntityManagerInterface $entityManager,
-        int $id,
-        Request $request,
-        HandleMessages $message
-    ) {
-        // Obtenemos todo el request de la petición http
+
+    public function update(EntityManagerInterface $em, int $id, Request $request, 
+                           HandleMessages $message) 
+    {
         $data = $request->request->all();
-        // Obtenemos el registro que nos interesa por su id
-        $product = $entityManager->getRepository(Product::class)->find($id);
-        // Asignamos los nuevos valores que vayamos a actualizar
+        $product = $em->getRepository(Product::class)->find($id);
         $product->setName($data['edit_product']['name']);
         $product->setDescription($data['edit_product']['description']);
-        // El campo price cambiamos el separador de miles y el de decimales para que los acepte MySql
         $product->setPrice(str_replace(',', '.', $data['edit_product']['price']));
-        if ($entityManager->flush() == null) {
+        if ($em->flush() == null) {
            $message->messageUpdate($product->getName());
         }
-        // Por último redireccionamos a la ruta muestra.     
         return $this->redirectToRoute('app_muestra');
     }
 
     #[Route('/product/image-show/{id}', name: 'app_product_image_show')]
 
-    public function modifyImage(
-        EntityManagerInterface $entityManager,
-        Request $request,
-        FileUploader $fileUploader,
-        HandleMessages $message,
-        $id
-    ) {
-        $product = $entityManager->getRepository(Product::class)->findOneBy(['id' => $id]);
+    public function modifyImage(EntityManagerInterface $em,Request $request,FileUploader $fileUploader,
+                                HandleMessages $message, $id) 
+    {
+
+        $product = $em->getRepository(Product::class)->find( $id);
         $form = $this->createForm(EditImageType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -101,11 +88,10 @@ class ProductController extends AbstractController
                 $imageFileName = $fileUploader->upload($imageFile);
                 $product->setImage($imageFileName);
             }
-            $entityManager->persist($product);
-
-            if ($entityManager->flush() == null) {
-                $message->messageUpdateImage($product->getName());
-            }
+            $em->persist($product);
+            $em->flush();
+            $message->messageUpdateImage($product->getName());
+            
             return $this->redirectToRoute('app_product_show', [
                 'id' => $id
             ]);
@@ -115,17 +101,16 @@ class ProductController extends AbstractController
             'id' => $id,
             'productName' => $product->getName()
         ]);
+
     }
 
     #[Route('/product/remove/{id}', name: 'app_product_remove')]
-    public function delete(
-        EntityManagerInterface $entityManager,
-        HandleMessages $message,
-        $id
-    ) {
-        $product = $entityManager->getRepository(Product::class)->find($id);       
-        $entityManager->remove($product);
-        $entityManager->flush();
+    public function delete(EntityManagerInterface $em,HandleMessages $message,$id)
+    {
+
+        $product = $em->getRepository(Product::class)->find($id);       
+        $em->remove($product);
+        $em->flush();
         $message->messageRemove($product->getName());
         
         return $this->redirectToRoute('app_muestra', [
